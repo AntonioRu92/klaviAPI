@@ -98,7 +98,15 @@ async function upsertProfile(profileData) {
     },
   };
 
-  await makeApiCall('POST', '/profiles/', payload);
+  try {
+    await makeApiCall('POST', '/profiles/', payload);
+  } catch (error) {
+    if (error.message.includes('409')) {
+      console.log('Profile already exists, skipping upsert');
+    } else {
+      throw error;
+    }
+  }
 }
 
 async function trackOrderEvent(eventData) {
