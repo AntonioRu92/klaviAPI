@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/webhooks/woocommerce/order-created', [WooOrderWebhookController::class, 'handle']);
+Route::post('/woocommerce/order_created', [WooOrderWebhookController::class, 'handle']);
